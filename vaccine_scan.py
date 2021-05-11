@@ -1,5 +1,6 @@
 import urllib3
 import json
+from playsound import playsound
 from datetime import datetime
 import time
 
@@ -43,6 +44,7 @@ def count_18plus_vaccine_scan(district):
 
         print("Time:{} District:{} Available capacity for 18+:{} Total availability:{}".format(dt_time,district,availability,total_availability))
         print("--------------------------------")
+        playsound('./file_example_WAV_1MG.wav')
     else:
         print("Time:{} District:{} Available capacity for 18+:{} Total availability:{}".format(dt_time,district,availability,total_availability))
         print("--------------------------------")
