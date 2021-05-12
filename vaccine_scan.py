@@ -30,28 +30,32 @@ def count_18plus_vaccine_scan(district):
             'X-Forwarded-For': '.'.join([str(random.randint(0,255)) for i in range(4)])
         }
         r = http.request('GET', uri, headers=headers)
-        slots = json.loads(r.data)
-        centers = slots['centers']
-        availability = 0
-        total_availability = 0
-        available_center_name=set()
-        for center in centers:
-            for session in center['sessions']:
-                total_availability += session['available_capacity']
-                if(session['min_age_limit'] == 18):
-                    availability += session['available_capacity']
-                    available_center_name.add(center['name'])
-        if availability > 0:
-            for center in available_center_name:
-                print("################################")
-                print("For 18+: District:{} and available center:{}".format(district,center))
-                print("################################")
+        try:
+            slots = json.loads(r.data)
+            centers = slots['centers']
+            availability = 0
+            total_availability = 0
+            available_center_name=set()
+            for center in centers:
+                for session in center['sessions']:
+                    total_availability += session['available_capacity']
+                    if(session['min_age_limit'] == 18):
+                        availability += session['available_capacity']
+                        available_center_name.add(center['name'])
+            if availability > 0:
+                for center in available_center_name:
+                    print("################################")
+                    print("For 18+: District:{} and available center:{}".format(district,center))
+                    print("################################")
 
-            print("Time:{} District:{} Available capacity for 18+:{} Total availability:{}".format(dt_time,district,availability,total_availability))
-            print("--------------------------------")
-            playsound('./file_example_WAV_1MG.wav')
-        else:
-            print("Time:{} District:{} Available capacity for 18+:{} Total availability:{}".format(dt_time,district,availability,total_availability))
+                print("Time:{} District:{} Available capacity for 18+:{} Total availability:{}".format(dt_time,district,availability,total_availability))
+                print("--------------------------------")
+                playsound('./file_example_WAV_1MG.wav')
+            else:
+                print("Time:{} District:{} Available capacity for 18+:{} Total availability:{}".format(dt_time,district,availability,total_availability))
+                print("--------------------------------")
+        except:
+            print("No data of slots on {} for district {}".format(dt.strftime("%d-%m-%Y"), district))
             print("--------------------------------")
         dt += datetime.timedelta(days=1)
         days += 1
@@ -72,28 +76,32 @@ def count_18plus_vaccine_scan_pincode(pincode):
             'X-Forwarded-For': '.'.join([str(random.randint(0,255)) for i in range(4)])
         }
         r = http.request('GET', uri, headers=headers)
-        slots = json.loads(r.data)
-        centers = slots['centers']
-        availability = 0
-        total_availability = 0
-        available_center_name=set()
-        for center in centers:
-            for session in center['sessions']:
-                total_availability += session['available_capacity']
-                if(session['min_age_limit'] == 18):
-                    availability += session['available_capacity']
-                    available_center_name.add(center['name'])
-        if availability > 0:
-            for center in available_center_name:
-                print("################################")
-                print("For 18+: Pincode:{} and available center:{}".format(pincode,center))
-                print("################################")
+        try:
+            slots = json.loads(r.data)
+            centers = slots['centers']
+            availability = 0
+            total_availability = 0
+            available_center_name=set()
+            for center in centers:
+                for session in center['sessions']:
+                    total_availability += session['available_capacity']
+                    if(session['min_age_limit'] == 18):
+                        availability += session['available_capacity']
+                        available_center_name.add(center['name'])
+            if availability > 0:
+                for center in available_center_name:
+                    print("################################")
+                    print("For 18+: Pincode:{} and available center:{}".format(pincode,center))
+                    print("################################")
 
-            print("Time:{} pincode:{} Available capacity for 18+:{} Total availability:{}".format(dt_time,pincode,availability,total_availability))
-            print("--------------------------------")
-            playsound('./file_example_WAV_1MG.wav')
-        else:
-            print("Time:{} Pincode:{} Available capacity for 18+:{} Total availability:{}".format(dt_time,pincode,availability,total_availability))
+                print("Time:{} pincode:{} Available capacity for 18+:{} Total availability:{}".format(dt_time,pincode,availability,total_availability))
+                print("--------------------------------")
+                playsound('./file_example_WAV_1MG.wav')
+            else:
+                print("Time:{} Pincode:{} Available capacity for 18+:{} Total availability:{}".format(dt_time,pincode,availability,total_availability))
+                print("--------------------------------")
+        except:
+            print("No data of slots on {} for pincode {}".format(dt.strftime("%d-%m-%Y"), pincode))
             print("--------------------------------")
         dt += datetime.timedelta(days=1)
         days += 1
