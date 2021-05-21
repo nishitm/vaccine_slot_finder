@@ -12,7 +12,7 @@ https://cdn-api.co-vin.in/api/v2/admin/location/states
 2. To get district codes in a state:
 https://cdn-api.co-vin.in/api/v2/admin/location/districts/16
 3. To get vaccine details by district and date
-https://cdn-api.co-vin.in/api/v2/appointment/sessions/calendarByDistrict?district_id=265&date=10-05-2021
+https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=265&date=10-05-2021
 '''
 
 
@@ -21,7 +21,7 @@ def count_18plus_vaccine_scan(district):
     dt = datetime.datetime.now()
     while(days <= 2):
         dt_time = dt.strftime("%d-%m-%Y %H:%M:%S %Z%z")
-        uri = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/calendarByDistrict?district_id=" + str(district) + "&date=" + dt.strftime("%d-%m-%Y")
+        uri = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=" + str(district) + "&date=" + dt.strftime("%d-%m-%Y")
         print(uri)
         http = urllib3.PoolManager()
 
@@ -67,7 +67,7 @@ def count_18plus_vaccine_scan_pincode(pincode):
     dt = datetime.datetime.now()
     while(days <= 2):
         dt_time = datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S %Z%z")
-        uri = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/calendarByPin?pincode=" + str(pincode) + "&date=" + dt.strftime("%d-%m-%Y")
+        uri = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode=" + str(pincode) + "&date=" + dt.strftime("%d-%m-%Y")
         print(uri)
         http = urllib3.PoolManager()
 
